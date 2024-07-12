@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import HotWallet from './store/HotWallet';
+import { observer } from 'mobx-react-lite';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = observer(() => {
+
+  // TODO : Return loader
+  if (!HotWallet.here) return null;
+
+  // Check if user authorised
+  if (!HotWallet.user) {
+    return (
+      <div>
+          <h1>Auth</h1>
+          <button onClick={HotWallet.login}>Connect wallet</button>
+      </div>
+    );
+  }
+
+  return(
+    <div>
+        <h1>Hello {HotWallet.user.nearAccountId}</h1>
+        <button onClick={HotWallet.logout}>Logout</button>
     </div>
-  );
-}
+  )
+
+})
 
 export default App;
