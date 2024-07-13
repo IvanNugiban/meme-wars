@@ -32,12 +32,15 @@ dd {
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
     background-color: var(--tg-theme-bg-color);
     padding: 10px;
+}
+
+html, body, #root, #root>div {
+    height: 100%
 }
 
 body, input, textarea, button {

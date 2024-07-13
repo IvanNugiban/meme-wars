@@ -2,26 +2,19 @@ import React from 'react';
 import "./App.css";
 import HotWallet from './store/HotWallet';
 import { observer } from 'mobx-react-lite';
+import RootRouter from './navigation/RootRouter';
+import Loader from './ui/Loader';
 
 const App = observer(() => {
 
   // TODO : Return loader
-  if (!HotWallet.here) return null;
-
-  // Check if user authorised
-  if (!HotWallet.user) {
-    return (
-      <div>
-          <h1>Auth</h1>
-          <button onClick={HotWallet.login}>Connect wallet</button>
-      </div>
-    );
-  }
+  if (!HotWallet.here) return <Loader />;
 
   return(
     <div>
-        <h1>Hello {HotWallet.user.nearAccountId}</h1>
-        <button onClick={HotWallet.logout}>Logout</button>
+        <main>
+          <RootRouter/>
+        </main>
     </div>
   )
 
