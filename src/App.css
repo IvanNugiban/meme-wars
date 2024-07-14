@@ -32,26 +32,17 @@ dd {
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
+    background: linear-gradient(90deg, rgba(7,87,255,1) 0%, rgba(1,155,255,1) 46%, rgba(6,125,253,1) 100%);
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
-    background-color: var(--tg-theme-bg-color);
-    padding: 10px;
+    background-color: white;
 }
 
-html, body, #root, #root>div {
+html, body, #root, #root>div, main, main>div {
     height: 100%
 }
 
-body, input, textarea, button {
-    color: var(--tg-theme-text-color);
-}
-
-button {
-    background-color: var(--tg-theme-button-color);
-    color: var(--tg-theme-button-text-color);
-    cursor: pointer;
-}
 
 ul,
 ol {
@@ -89,4 +80,11 @@ select {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+@font-face {
+    font-family: "Unispace";
+    src: url("./assets/fonts/Unispace.otf");
+    font-weight: normal;
+    font-style: normal;
 }

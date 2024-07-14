@@ -5,10 +5,10 @@ import { keyframes } from '@emotion/react';
 const spin = keyframes`
     from {
         transform: rotate(0deg);
-        }
+    }
     to {
         transform: rotate(360deg);
-        }
+    }
 `
 
 const StyledLoader = styled.div`
@@ -26,7 +26,7 @@ const StyledLoader = styled.div`
 const Loader = () => {
   return (
     <StyledLoader>
-        <img src={require("../assets/doge.png")}/>
+        <img src={require("../assets/images/doge.png")}/>
     </StyledLoader>
   )
 }
