@@ -56,7 +56,6 @@ const Wrapper = styled.div`
 
 const AuthPage = observer(() => {
     return (
-        <div>
             <Container>
                 <Wrapper>
                     <Box display='flex' flexDirection='column' rowGap='20px'>
@@ -70,7 +69,6 @@ const AuthPage = observer(() => {
                     <Button style={{ fontSize: '1.2em' }} variant="contained" endIcon={<HotWalletIcon/>} onClick={HotWallet.login}>Connect hot wallet</Button>
                 </Wrapper>
             </Container>
-        </div>
     );
 })
 

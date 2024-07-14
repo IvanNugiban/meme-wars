@@ -4,6 +4,7 @@ import HotWallet from './store/HotWallet';
 import { observer } from 'mobx-react-lite';
 import RootRouter from './navigation/RootRouter';
 import Loader from './ui/Loader';
+import Header from './ui/Header';
 
 const App = observer(() => {
 
@@ -12,6 +13,7 @@ const App = observer(() => {
 
   return(
     <div>
+        {HotWallet.user && <Header/>}
         <main>
           <RootRouter/>
         </main>
