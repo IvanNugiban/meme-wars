@@ -66,7 +66,7 @@ const AuthPage = observer(() => {
                         </Title>
                     </Box>
                     <img height="250px" src={require('../assets/images/pop-cat.gif')}/>
-                    <Button style={{ fontSize: '1.2em' }} variant="contained" endIcon={<HotWalletIcon/>} onClick={HotWallet.login}>Connect hot wallet</Button>
+                    <Button style={{ fontSize: '1em' }} variant="contained" endIcon={<HotWalletIcon/>} onClick={HotWallet.login}>Connect hot wallet</Button>
                 </Wrapper>
             </Container>
     );

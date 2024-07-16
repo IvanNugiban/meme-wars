@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import RootRouter from './navigation/RootRouter';
 import Loader from './ui/Loader';
 import Header from './ui/Header';
+import Footer from './ui/Footer';
 
 const App = observer(() => {
 
@@ -17,6 +18,7 @@ const App = observer(() => {
         <main>
           <RootRouter/>
         </main>
+        {HotWallet.user && <Footer/>}
     </div>
   )
 

@@ -39,8 +39,10 @@ body {
     background-color: white;
 }
 
-html, body, #root, #root>div, main, main>div {
-    height: 100%
+html, body, #root, #root>div, main {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 

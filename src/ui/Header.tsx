@@ -16,6 +16,7 @@ const Header = () => {
                     </Typography>
                 </Toolbar>
             </AppBar>
+            <Toolbar/>
         </header>
     )
 }
