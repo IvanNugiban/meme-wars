@@ -1,13 +1,12 @@
 import React from 'react'
 import HotWallet from '../store/HotWallet';
-import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = () => {
     return (
-        <header>
-            <AppBar position="fixed">
-                <Toolbar>
+            <AppBar position="sticky" >
+                <Toolbar variant='dense'>
                     <IconButton color='secondary' onClick={HotWallet.logout} sx={{ mr: 2 }}>
                         <LogoutIcon />
                     </IconButton>
@@ -16,8 +15,6 @@ const Header = () => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Toolbar/>
-        </header>
     )
 }
 

@@ -14,7 +14,7 @@ class HotWallet {
     init = async () => {
 
         const here = await HereWallet.connect({
-            botId: "NearFriendsBot/app", 
+            botId: "memewarss_bot/app", 
             walletId: "herewalletbot/beta",
         });
         

@@ -37,13 +37,13 @@ body {
     text-rendering: optimizeSpeed;
     line-height: 1.5;
     background-color: white;
+    color: white;
 }
 
-html, body, #root, #root>div, main {
+html, body, #root, #root>div {
     height: 100%;
-    margin: 0;
-    overflow: hidden;
 }
+
 
 
 ul,
