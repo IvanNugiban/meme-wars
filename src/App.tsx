@@ -23,7 +23,7 @@ const App = observer(() => {
   return(
     <div>
         {HotWallet.user && <Header/>}
-        <StyledMain fixed={(HotWallet.user ?? false)  && (location.pathname == '/' || location.pathname == '/submit')}>
+        <StyledMain fixed={!!HotWallet.user && (location.pathname == '/' || location.pathname == '/submit')}>
           <RootRouter/> 
         </StyledMain>
         {HotWallet.user && <Footer/>}

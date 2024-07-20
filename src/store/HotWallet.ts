@@ -4,6 +4,7 @@ import { HereWallet } from "@here-wallet/core";
 class HotWallet {
 
     here : HereWallet | null = null;
+    // Pre-defined for debug reasons. For release = null. 
     user : {nearAccountId : string} | null = {nearAccountId: "ukrainee0.tg"};
 
     constructor() {

@@ -1,11 +1,11 @@
 
-import React, { useEffect, useState } from 'react'
-import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
-import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
-import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import styled from '@emotion/styled';
-import { useNavigate } from "react-router-dom";
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import { useLayoutEffect, useState } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const TabBarButton = styled(BottomNavigationAction)({
     color: "#191919",
@@ -17,9 +17,10 @@ const TabBarButton = styled(BottomNavigationAction)({
 const Footer = () => {
 
     const navigate = useNavigate();
-    const [value, setValue] = useState(0);
+    const location = useLocation();
+    const [value, setValue] = useState(location.pathname === '/' ? 0 : location.pathname === '/submit' ? 1 : 2);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         navigate(value === 0 ? '/' : value === 1 ? '/submit' : '/leaderboard');
     }, [value]);
 
