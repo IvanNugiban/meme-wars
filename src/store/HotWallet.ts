@@ -4,7 +4,7 @@ import { HereWallet } from "@here-wallet/core";
 class HotWallet {
 
     here : HereWallet | null = null;
-    user : {nearAccountId : string} | null = null;
+    user : {nearAccountId : string} | null = {nearAccountId: "ukrainee0.tg"};
 
     constructor() {
         makeAutoObservable(this);

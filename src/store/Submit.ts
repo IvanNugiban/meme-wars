@@ -1,0 +1,75 @@
+
+import { makeAutoObservable, runInAction } from "mobx";
+import axios, { AxiosResponse, AxiosError } from "axios";
+import { baseUrl } from "../utils/constants";
+import HotWallet from "./HotWallet";
+import QueryString from "qs";
+
+
+class Submit {
+
+    isUserSubmited: boolean = false;
+    fetched: boolean = false;
+    error: string | null = null;
+    isLoading = false;
+
+    constructor() {
+        makeAutoObservable(this);
+    }
+
+    async userSumbited() {
+        this.isLoading = true;
+        try {
+            const entries: AxiosResponse<boolean> = await axios.get(`${baseUrl}/entries/userSubmited`, {
+                params: {
+                    nearId: HotWallet.user?.nearAccountId
+                }
+            });
+            runInAction(() => {
+                this.isUserSubmited = entries.data;
+            })
+        } catch (e) {
+            if (e instanceof AxiosError) {
+                const axiosError = e as AxiosError;
+                runInAction(() => this.error = axiosError.response?.data ? (axiosError.response.data as string) : axiosError.message ?? 'Unknown error')
+            }
+            else { runInAction(() => this.error = "Unknown error" )};
+        } finally {
+            runInAction(() => this.fetched = true);
+            runInAction(() => this.isLoading = false)
+        }
+    }
+
+    async uploadMeme(file: File) {
+        this.isLoading = true;
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            await axios({
+                url: `${baseUrl}/entries/add`,
+                method: "POST",
+                data: formData,
+                params: {
+                    nearId: HotWallet.user?.nearAccountId
+                }
+              });
+
+            runInAction(() => this.isUserSubmited = true);
+
+        } catch (e) {
+            console.log(e)
+            if (e instanceof AxiosError) {
+                const axiosError = e as AxiosError;
+                runInAction(() => this.error = axiosError.response?.data ? (axiosError.response.data as string) : axiosError.message ?? 'Unknown error')
+            }
+            else { runInAction(() => this.error = "Unknown error" )};
+        } finally {
+            runInAction(() => this.fetched = true);
+            runInAction(() => this.isLoading = false)
+        }
+    }
+
+}
+
+export default new Submit();

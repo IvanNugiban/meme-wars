@@ -1,6 +1,6 @@
 
 import {makeAutoObservable, runInAction} from "mobx";
-import axios, {AxiosResponse} from "axios";
+import axios, {AxiosError, AxiosResponse} from "axios";
 import {baseUrl} from "../utils/constants";
 import HotWallet from "./HotWallet";
 import IEntry from "../types/IEntry";
@@ -9,7 +9,8 @@ class Entries {
 
     firstEntry: IEntry | null = null;
     secondEntry: IEntry | null = null;
-    error: unknown | undefined = undefined;
+    fetched: boolean = false;
+    error:  string | null = null;
     isLoading = false;
 
     constructor() {
@@ -28,10 +29,15 @@ class Entries {
                 this.firstEntry = entries.data[0];
                 this.secondEntry = entries.data[1];
         })
-        } catch (e) {
-            runInAction(() => this.error = e)
+        } catch (e ) {
+            if (e instanceof AxiosError) {
+                const axiosError = e as AxiosError;
+                runInAction(() => this.error = axiosError.response?.data ? (axiosError.response.data as string) : axiosError.message ?? 'Unknown error')
+            }
+            else { runInAction(() => this.error = "Unknown error" )};
         } finally {
             runInAction(() => this.isLoading = false)
+            runInAction(() => this.fetched = true)
         }
     }
 }

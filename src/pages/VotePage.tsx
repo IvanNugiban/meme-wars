@@ -4,15 +4,17 @@ import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import Entries from '../store/Entries'
 import Loader from '../ui/Loader'
+import ErrorMessage from '../ui/ErrorMessage'
+
 
 const VotePage = observer(() => {
 
   useEffect(() => {
-    Entries.getPair();
+   if (!Entries.fetched) Entries.getPair();
   }, [])
 
   if (Entries.isLoading) return <Loader />
-  //if (Entries.error || !Entries.firstEntry || !Entries.secondEntry) return <Error message=''/>;
+  if (Entries.error) return <ErrorMessage text={Entries.error}/>;
 
   return (
     <Box display='flex' height="100%" flexDirection='column' alignItems='center' justifyContent='space-between' >

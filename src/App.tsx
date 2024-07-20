@@ -15,10 +15,10 @@ const StyledMain = styled.main`
 
 const App = observer(() => {
 
+  const location = useLocation();
+
   // TODO : Return loader
   if (!HotWallet.here) return <Loader />;
-
-  const location = useLocation();
 
   return(
     <div>
