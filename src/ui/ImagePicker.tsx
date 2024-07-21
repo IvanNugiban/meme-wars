@@ -4,8 +4,9 @@ import { PhotoCamera } from '@mui/icons-material';
 import styled from "@emotion/styled";
 
 const ImageLoad = styled.label`
-  display: inline-block;
-  padding: 100px;
+  display: flex;
+  justify-content: center;
+  padding: 12vh;
   border: 6px dashed white;
   cursor: pointer;
 `

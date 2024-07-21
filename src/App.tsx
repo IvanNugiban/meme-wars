@@ -7,10 +7,12 @@ import HotWallet from './store/HotWallet';
 import Footer from './ui/Footer';
 import Header from './ui/Header';
 import Loader from './ui/Loader';
+import AlertMessage from './ui/AlertMessage';
 
 // Make page fixed or scrollable
 const StyledMain = styled.main`
- ${(props : {fixed : boolean}) => props.fixed ? `height: calc(100vh - 104px)` : 'min-height: 100%'};
+ ${(props : {fixed : boolean}) => props.fixed ? `height: calc(100vh - 104px)` : 'height: 100%'};
+ overflow: auto;
 `
 
 const App = observer(() => {
@@ -23,10 +25,11 @@ const App = observer(() => {
   return(
     <div>
         {HotWallet.user && <Header/>}
-        <StyledMain fixed={!!HotWallet.user && (location.pathname == '/' || location.pathname == '/submit')}>
+        <StyledMain fixed={!!HotWallet.user}>
           <RootRouter/> 
         </StyledMain>
         {HotWallet.user && <Footer/>}
+        <AlertMessage/>
     </div>
   )
 

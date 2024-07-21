@@ -21,7 +21,7 @@ const SubmitPage = observer(() => {
 
   if (Submit.isLoading && !Submit.fetched) return <Loader />
   if (Submit.error) return <ErrorMessage text={Submit.error} />;
-  if (Submit.isUserSubmited) return <SuccessMessage text="You successfully submited your meme. Come back tomorrow!" />
+  if (Submit.isUserSubmited) return <SuccessMessage text="You successfully submited your meme." />
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -43,12 +43,11 @@ const SubmitPage = observer(() => {
 
   return (
     <Container>
-      <Box height='100%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center' p={3} textAlign="center">
+      <Box height='100%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center'  textAlign="center" gap={2}>
         <Box>
           <Typography textAlign='center' variant='h4' fontFamily='cursive' sx={{ marginBottom: "5px" }}>
             Upload your meme
           </Typography>
-
           <Typography textAlign='center' variant='h5' fontFamily='cursive'>
             (it will participate in tomorrow's contest)
           </Typography>
