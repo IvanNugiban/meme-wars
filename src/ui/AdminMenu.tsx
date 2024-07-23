@@ -1,39 +1,60 @@
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AddAlarmIcon from '@mui/icons-material/AddAlarm';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
+import { CircularProgress, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useState } from 'react';
 import axiosHelper from '../utils/axiosHelper';
 
-const actions = [
-  {
-    icon: <AddAlarmIcon />, name: 'Add entries for next event',
-    callback: () => axiosHelper.request("/entries/addTest", "POST", {current: false})
-  },
-  {
-    icon: <AddAPhotoIcon />, name: 'Add entries for current event',
-    callback: () => axiosHelper.request("/entries/addTest", "POST", {current: true})
-  },
-  {
-    icon: <RefreshIcon />, name: 'Refresh leaderboard',
-    callback: async () => {
-      await axiosHelper.request("/events/refreshLeaderboard", "PUT", {current: true});
-      window.location.reload();
-    }
-  },
-  {
-    icon: <PowerSettingsNewIcon />, name: 'End event',
-    callback: async () => {
-     await axiosHelper.request("/events/endEvent", "PUT");
-     window.location.reload();
-    }
-  },
-];
 
 const AdminMenu = () => {
 
   const [open, setOpen] = useState(false);
+  const [nextEntriesLoading, setNextEntriesLoading] = useState(false);
+  const [currentEntriesLoading, setCurrentEntriesLoading] = useState(false);
+  const [leaderboardLoading, setLeaderboardLoading] = useState(false);
+  const [endEventLoading, setEndEventLoading] = useState(false);
+
+  const actions = [
+    {
+      icon: !nextEntriesLoading ? <AddAlarmIcon /> : <CircularProgress size={24} />, name: 'Add entries for next event',
+      callback: async () => {
+        if (nextEntriesLoading) return;
+        setNextEntriesLoading(true);
+        await axiosHelper.request("/entries/addTest", "POST", { current: false })
+        setNextEntriesLoading(false);
+      }
+    },
+    {
+      icon: !currentEntriesLoading ? <AddAPhotoIcon /> : <CircularProgress size={24} />, name: 'Add entries for current event',
+      callback: async () => {
+        if (currentEntriesLoading) return;
+        setCurrentEntriesLoading(true);
+        await axiosHelper.request("/entries/addTest", "POST", { current: true })
+        setCurrentEntriesLoading(false);
+      }
+    },
+    {
+      icon: !leaderboardLoading ? <RefreshIcon /> : <CircularProgress size={24} />, name: 'Refresh leaderboard',
+      callback: async () => {
+        if (leaderboardLoading) return;
+        setLeaderboardLoading(true);
+        await axiosHelper.request("/events/refreshLeaderboard", "PUT", { current: true });
+        setLeaderboardLoading(false);
+        window.location.reload();
+      }
+    },
+    {
+      icon: !endEventLoading ? <PowerSettingsNewIcon /> : <CircularProgress size={24} />, name: 'End event',
+      callback: async () => {
+        if (endEventLoading) return;
+        setEndEventLoading(true);
+        await axiosHelper.request("/events/endEvent", "PUT");
+        setEndEventLoading(false);
+        window.location.reload();
+      }
+    },
+  ];
 
   return (
     <SpeedDial
@@ -46,10 +67,7 @@ const AdminMenu = () => {
     >
       {actions.map((action) => (
         <SpeedDialAction
-          onClick={() => {
-            action.callback();
-            setOpen(false)
-          }}
+          onClick={action.callback}
           key={action.name}
           icon={action.icon}
           tooltipTitle={action.name}

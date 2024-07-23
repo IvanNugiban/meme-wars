@@ -25,11 +25,11 @@ const HighlightedTableRow = styled(TableRow, {
 interface IProps {
     entry: IEntry;
     position: number;
-    onClick?: () => void;
+    onClick: () => void;
     highlighted?: boolean;
 }
 
-const LeaderboardItem = ({ entry, position, onClick = undefined, highlighted = false }: IProps) => {
+const LeaderboardItem = ({ entry, position, onClick, highlighted = false }: IProps) => {
     return (
             <HighlightedTableRow onClick={onClick} key={entry.nearId} highlighted={highlighted}>
                 <TableCell style={{ minWidth: '20px', maxWidth: '200px' }}>{position}</TableCell>

@@ -1,17 +1,16 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import HotWallet from '../store/HotWallet'
 import Leaderboard from '../store/Leaderboard'
+import IEntry from '../types/IEntry'
 import IEvent from '../types/IEvent'
 import Container from '../ui/Container'
 import ErrorMessage from '../ui/ErrorMessage'
-import Loader from '../ui/Loader'
-import HotWalletIcon from '../icons/HotWalletIcon'
-import React from 'react'
 import EventPeriod from '../ui/EventPeriod'
-import HotWallet from '../store/HotWallet'
 import LeaderboardItem from '../ui/LeaderboardItem'
-import IEntry from '../types/IEntry'
+import Loader from '../ui/Loader'
+import { baseUrl } from '../utils/constants'
 
 interface IProps {
   event?: IEvent;
@@ -80,7 +79,7 @@ const LeaderboardPage = observer(({ event }: IProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {userEntry && <LeaderboardItem entry={userEntry.entry} position={userEntry.position} highlighted />}
+                {userEntry && <LeaderboardItem onClick={() => setActiveEntry(userEntry.entry)} entry={userEntry.entry} position={userEntry.position} highlighted />}
                 {leaderboardData.entries.map((row, index) => {
                   // Skip rendering if it's current user entry
                   if (row.nearId === HotWallet.user?.nearAccountId) return null;
@@ -92,10 +91,10 @@ const LeaderboardPage = observer(({ event }: IProps) => {
             </Table>
           </TableContainer>
 
-          <Dialog open={activeEntry !== null} onClose={() => setActiveEntry(null)}>
-            <DialogTitle>{activeEntry?.nearId}</DialogTitle>
+          {activeEntry && <Dialog open={true} onClose={() => setActiveEntry(null)}>
+            <DialogTitle>{activeEntry.nearId}</DialogTitle>
             <DialogContent>
-              <img src={activeEntry?.image}/>
+              <img src={baseUrl + "\\" + activeEntry.image} />
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setActiveEntry(null)} color="primary">
@@ -103,6 +102,7 @@ const LeaderboardPage = observer(({ event }: IProps) => {
               </Button>
             </DialogActions>
           </Dialog>
+          }
 
         </React.Fragment>
       }

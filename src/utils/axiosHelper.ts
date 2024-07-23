@@ -23,7 +23,7 @@ class AxiosHelper {
 
             if (e instanceof AxiosError) {
                 const axiosError = e as AxiosError;
-                AlertStore.setAlert(axiosError.response?.data ? (axiosError.response.data as string) : axiosError.message ?? 'Unknown error', "error");
+                AlertStore.setAlert(typeof axiosError.response?.data === "string" ? (axiosError.response.data as string) : axiosError.message ?? 'Unknown error', "error");
             }
 
             else AlertStore.setAlert("Unknown error", "error");

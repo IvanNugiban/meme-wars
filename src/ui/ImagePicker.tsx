@@ -1,7 +1,8 @@
-import React from "react"
-import { IconButton } from "@mui/material";
-import { PhotoCamera } from '@mui/icons-material';
 import styled from "@emotion/styled";
+import { PhotoCamera } from '@mui/icons-material';
+import { IconButton, Typography } from "@mui/material";
+import React from "react";
+import AlertStore from "../store/AlertStore";
 
 const ImageLoad = styled.label`
   display: flex;
@@ -12,24 +13,36 @@ const ImageLoad = styled.label`
 `
 
 interface IProps {
-  handleFileChange: (e : React.ChangeEvent<HTMLInputElement>) => void;
+  handleFileChange: (file: File) => void;
 }
 
-const ImagePicker = ({handleFileChange} : IProps) => {
+const ImagePicker = ({ handleFileChange }: IProps) => {
   return (
     <React.Fragment>
-         <input
-          accept="image/*"
-          style={{ display: 'none' }}
-          id="upload-button"
-          type="file"
-          onChange={handleFileChange}
-        />
-        <ImageLoad htmlFor="upload-button">
-          <IconButton color="secondary" aria-label="upload picture" component="span" >
-            <PhotoCamera fontSize="large" />
-          </IconButton>
-        </ImageLoad>
+      <input
+        accept=".gif, .png, .jpeg, .jpg"
+        style={{ display: 'none' }}
+        id="upload-button"
+        type="file"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+
+          if (!file) return AlertStore.setAlert("'Please select a file.", "error");
+
+          const validTypes = ['image/gif', 'image/png', 'image/jpeg', 'image/jpg'];
+
+          if (!validTypes.includes(file.type)) 
+            return AlertStore.setAlert('Only GIF, PNG, JPG and JPEG images are allowed.', "error");
+          
+
+          handleFileChange(file);
+        }}
+      />
+      <ImageLoad htmlFor="upload-button">
+        <IconButton color="secondary" aria-label="upload picture" component="span" >
+          <PhotoCamera fontSize="large" />
+        </IconButton>
+      </ImageLoad>
     </React.Fragment>
   )
 }
