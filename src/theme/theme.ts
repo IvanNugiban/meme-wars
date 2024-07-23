@@ -13,6 +13,9 @@ const theme = createTheme({
       shape: {
         borderRadius: 8,
       },
+      typography: {
+        fontFamily: "ComicSansMS"
+      }
 })
 
 export default theme;

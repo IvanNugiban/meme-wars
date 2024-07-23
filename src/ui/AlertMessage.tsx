@@ -8,6 +8,7 @@ const AlertMessage = observer(() => {
     <Snackbar open={AlertStore.message != ''} anchorOrigin={{horizontal: "right", vertical: "top"}}
      onClose={AlertStore.closeAlert} autoHideDuration={AlertStore.timeout}>
   <Alert
+    sx={{fontFamily: "ComicSansMS"}}
     onClose={AlertStore.closeAlert}
     severity={AlertStore.severity}
     variant="filled"

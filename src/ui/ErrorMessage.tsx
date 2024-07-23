@@ -12,7 +12,7 @@ const ErrorMessage = ({text} : IProps) => {
     <Container>
       <Box display='flex' flexDirection='column'  height='100%' justifyContent='center' gap='30px'>
       <img style={{ width: '100%', maxHeight: '200px', objectFit: 'contain', borderRadius: "20px" }} src={require("../assets/images/oops.gif")}/>
-        <Typography textAlign="center" variant="h6" >{text}</Typography>
+        <Typography fontFamily='ComicSansMS' textAlign="center" variant="h6" >{text}</Typography>
       </Box>
     </Container>
   )

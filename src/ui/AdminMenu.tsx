@@ -2,7 +2,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AddAlarmIcon from '@mui/icons-material/AddAlarm';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
-import AlertStore from '../store/AlertStore';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { useState } from 'react';
 import axiosHelper from '../utils/axiosHelper';
 
@@ -16,8 +16,18 @@ const actions = [
     callback: () => axiosHelper.request("/entries/addTest", "POST", {current: true})
   },
   {
+    icon: <RefreshIcon />, name: 'Refresh leaderboard',
+    callback: async () => {
+      await axiosHelper.request("/events/refreshLeaderboard", "PUT", {current: true});
+      window.location.reload();
+    }
+  },
+  {
     icon: <PowerSettingsNewIcon />, name: 'End event',
-    callback: () => axiosHelper.request("/events/endEvent", "PUT")
+    callback: async () => {
+     await axiosHelper.request("/events/endEvent", "PUT");
+     window.location.reload();
+    }
   },
 ];
 
@@ -28,7 +38,7 @@ const AdminMenu = () => {
   return (
     <SpeedDial
       ariaLabel="SpeedDial basic example"
-      sx={{ position: 'absolute', bottom: 75, right: 20 }}
+      sx={{ position: 'absolute', bottom: 70, right: 25 }}
       onOpen={() => setOpen(true)}
       onClose={() => setOpen(false)}
       open={open}

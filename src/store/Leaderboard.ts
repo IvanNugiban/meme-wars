@@ -1,34 +1,37 @@
 
 
-import {makeAutoObservable, runInAction} from "mobx";
-import axios, {AxiosResponse} from "axios";
-import {baseUrl} from "../utils/constants";
-import HotWallet from "./HotWallet";
-import ILeaderboardItem from "../types/ILeaderboardItem";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { makeAutoObservable, runInAction } from "mobx";
+import IEvent from "../types/IEvent";
+import { baseUrl } from "../utils/constants";
 
 class Leaderboard {
 
-    items: ILeaderboardItem[] = [{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5},{nearId: "paveldurov.tg", image: "", reward: 5}, {nearId: "paveldurov.tg", image: "", reward: 5}];
+    previousEvent: IEvent | null = null;
     error: unknown | undefined = undefined;
+    fetched: boolean = false;
     isLoading = false;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    async fetch() {
+    async getPrevious() {
         this.isLoading = true;
         try {
-            const entries: AxiosResponse<ILeaderboardItem[]> = await axios.get(`${baseUrl}/leaderboard/fetch`, {
-                params: {
-                  nearId: HotWallet.user?.nearAccountId
-                }
-            });
+            const result: AxiosResponse<IEvent> = await axios.get(`${baseUrl}/events/getPrevious`);
             runInAction(() => {
-               this.items = entries.data;
+               this.previousEvent = result.data;
         })
         } catch (e) {
-            runInAction(() => this.error = e)
+            if (e instanceof AxiosError) {
+                const axiosError = e as AxiosError;
+                runInAction(() => this.error = typeof axiosError.response?.data === "string" ? (axiosError.response.data) : axiosError.message ?? 'Unknown error')
+            }
+            else { runInAction(() => {
+                this.error = "Unknown error"
+                this.fetched = true;
+         } )};
         } finally {
             runInAction(() => this.isLoading = false)
         }

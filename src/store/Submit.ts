@@ -31,7 +31,7 @@ class Submit {
         } catch (e) {
             if (e instanceof AxiosError) {
                 const axiosError = e as AxiosError;
-                runInAction(() => this.error = axiosError.response?.data ? (axiosError.response.data as string) : axiosError.message ?? 'Unknown error')
+                runInAction(() => this.error =typeof axiosError.response?.data === "string" ? (axiosError.response.data) : axiosError.message ?? 'Unknown error')
             }
             else { runInAction(() => this.error = "Unknown error" )};
         } finally {
@@ -58,10 +58,9 @@ class Submit {
             runInAction(() => this.isUserSubmited = true);
 
         } catch (e) {
-            console.log(e)
             if (e instanceof AxiosError) {
                 const axiosError = e as AxiosError;
-                runInAction(() => this.error = axiosError.response?.data ? (axiosError.response.data as string) : axiosError.message ?? 'Unknown error')
+                runInAction(() => this.error = typeof axiosError.response?.data === "string"  ? (axiosError.response.data ) : axiosError.message ?? 'Unknown error')
             }
             else { runInAction(() => this.error = "Unknown error" )};
         } finally {

@@ -31,7 +31,7 @@ dd {
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'ComicSansMS', sans-serif;
     background: linear-gradient(90deg, rgba(7,87,255,1) 0%, rgba(1,155,255,1) 46%, rgba(6,125,253,1) 100%);
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
@@ -87,6 +87,13 @@ select {
 @font-face {
     font-family: "Unispace";
     src: url("./assets/fonts/Unispace.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ComicSansMS";
+    src: url("./assets/fonts/ComicSansMS.ttf");
     font-weight: normal;
     font-style: normal;
 }

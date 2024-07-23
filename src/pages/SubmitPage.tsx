@@ -45,10 +45,10 @@ const SubmitPage = observer(() => {
     <Container>
       <Box height='100%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center'  textAlign="center" gap={2}>
         <Box>
-          <Typography textAlign='center' variant='h4' fontFamily='cursive' sx={{ marginBottom: "5px" }}>
+          <Typography textAlign='center' variant='h4' fontFamily='ComicSansMS' sx={{ marginBottom: "5px" }}>
             Upload your meme
           </Typography>
-          <Typography textAlign='center' variant='h5' fontFamily='cursive'>
+          <Typography textAlign='center' variant='h5' fontFamily='ComicSansMS'>
             (it will participate in tomorrow's contest)
           </Typography>
         </Box>
@@ -57,12 +57,13 @@ const SubmitPage = observer(() => {
           <Box position='relative' mt={2}>
             <img src={preview} alt="Preview" style={{ width: '100%', maxHeight: '300px', objectFit: 'cover' }} />
             <IconButton onClick={reset} sx={{position: 'absolute', right: 0, top: 0, transform: "translate(50%, -50%)"}} color="error" aria-label="cancel picture" >
-              <CancelOutlinedIcon fontSize="large" />
+              <CancelOutlinedIcon  fontSize="large" />
             </IconButton>
           </Box>
         }
         <Box mt={2}>
           <Button
+            sx={{fontFamily: 'ComicSansMS'}}
             variant="contained"
             size='large'
             color="primary"
