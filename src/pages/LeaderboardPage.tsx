@@ -34,12 +34,12 @@ const LeaderboardPage = observer(({ event }: IProps) => {
 
   const userEntry = useMemo(() => {
     if (leaderboardData) {
-      const index = leaderboardData.entries.findIndex(item => item.nearId === HotWallet.user?.nearAccountId);
+      const index = leaderboardData.leaderboard.findIndex(item => item.nearId === HotWallet.user?.nearAccountId);
 
       if (index === -1) return undefined;
 
       return {
-        entry: leaderboardData.entries[index],
+        entry: leaderboardData.leaderboard[index],
         position: index + 1
       }
     }
@@ -65,7 +65,7 @@ const LeaderboardPage = observer(({ event }: IProps) => {
         <Tab label="Previous event" />
       </Tabs>
 
-      {!leaderboardData || leaderboardData.entries.length === 0 ? <ErrorMessage text={"There is no data to display."} />
+      {!leaderboardData || leaderboardData.leaderboard.length === 0 ? <ErrorMessage text={"There is no data to display."} />
         :
         <React.Fragment>
           <EventPeriod startDate={leaderboardData.startDate} endDate={leaderboardData.endDate} />
@@ -80,7 +80,7 @@ const LeaderboardPage = observer(({ event }: IProps) => {
               </TableHead>
               <TableBody>
                 {userEntry && <LeaderboardItem onClick={() => setActiveEntry(userEntry.entry)} entry={userEntry.entry} position={userEntry.position} highlighted />}
-                {leaderboardData.entries.map((row, index) => {
+                {leaderboardData.leaderboard.map((row, index) => {
                   // Skip rendering if it's current user entry
                   if (row.nearId === HotWallet.user?.nearAccountId) return null;
                   return (
@@ -95,6 +95,7 @@ const LeaderboardPage = observer(({ event }: IProps) => {
             <DialogTitle>{activeEntry.nearId}</DialogTitle>
             <DialogContent>
               <img src={baseUrl + "\\" + activeEntry.image} />
+              <Typography marginTop={2}>Score: {activeEntry.score}</Typography>
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setActiveEntry(null)} color="primary">

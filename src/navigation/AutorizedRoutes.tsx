@@ -29,7 +29,7 @@ const AutorizedRoutes = () => {
     return (
         <React.Fragment>
             <Routes>
-                <Route path="/" element={<React.Suspense fallback={<Loader />}><VotePage /></React.Suspense>} />
+                <Route path="/" element={<React.Suspense fallback={<Loader />}><VotePage event={event}/></React.Suspense>} />
                 <Route path="/submit" element={<React.Suspense fallback={<Loader />}><SubmitPage /></React.Suspense>} />
                 <Route path="/leaderboard" element={<React.Suspense fallback={<Loader />}><LeaderboardPage event={event}/></React.Suspense>} />
             </Routes>

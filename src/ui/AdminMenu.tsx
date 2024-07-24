@@ -41,7 +41,7 @@ const AdminMenu = () => {
         setLeaderboardLoading(true);
         await axiosHelper.request("/events/refreshLeaderboard", "PUT", { current: true });
         setLeaderboardLoading(false);
-        window.location.reload();
+        setTimeout(() => window.location.reload(), 3000);
       }
     },
     {
@@ -51,7 +51,7 @@ const AdminMenu = () => {
         setEndEventLoading(true);
         await axiosHelper.request("/events/endEvent", "PUT");
         setEndEventLoading(false);
-        window.location.reload();
+        setTimeout(() => window.location.reload(), 3000);
       }
     },
   ];
