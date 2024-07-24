@@ -1,5 +1,4 @@
 
-import React from 'react'
 import Container from './Container'
 import { Typography, Box } from '@mui/material'
 

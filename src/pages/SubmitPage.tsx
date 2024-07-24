@@ -3,6 +3,7 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { Box, Button, CircularProgress, IconButton, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
+import HotWalletIcon from '../icons/HotWalletIcon';
 import Submit from '../store/Submit';
 import Container from '../ui/Container';
 import ErrorMessage from '../ui/ErrorMessage';
@@ -23,13 +24,14 @@ const SubmitPage = observer(() => {
   if (Submit.error) return <ErrorMessage text={Submit.error} />;
   if (Submit.isUserSubmited) return <SuccessMessage text="You successfully submited your meme." />
 
-  const handleFileChange = (file : File) => {
-      setSelectedFile(file);
-      setPreview(URL.createObjectURL(file));
+  const handleFileChange = (file: File) => {
+    setSelectedFile(file);
+    setPreview(URL.createObjectURL(file));
   };
 
   const handleUpload = () => {
     if (!selectedFile) return;
+
     Submit.uploadMeme(selectedFile);
   };
 
@@ -67,7 +69,12 @@ const SubmitPage = observer(() => {
             disabled={!selectedFile || Submit.isLoading}
             onClick={handleUpload}
           >
-            {Submit.isLoading ? <CircularProgress size={24} /> : 'Upload'}
+            {Submit.isLoading ? <CircularProgress size={24} /> :
+              <Box display='flex' justifyContent='center'>
+                <Box mr={1}>Upload</Box> (1
+                <HotWalletIcon />
+                )
+              </Box>}
           </Button>
         </Box>
       </Box>

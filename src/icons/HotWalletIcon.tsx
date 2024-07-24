@@ -3,7 +3,7 @@ import { Icon } from '@mui/material'
 import styled from '@emotion/styled'
 
 const EnlargedImage = styled.img`
-    transform: scale(1.5);
+    transform: scale(1.3);
 `
 
 const HotWalletIcon = () => {

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { PhotoCamera } from '@mui/icons-material';
-import { IconButton, Typography } from "@mui/material";
+import { IconButton } from "@mui/material";
 import React from "react";
 import AlertStore from "../store/AlertStore";
 

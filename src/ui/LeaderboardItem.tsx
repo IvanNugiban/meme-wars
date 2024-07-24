@@ -1,9 +1,7 @@
-import { Button, TableCell, TableRow, TableRowProps } from '@mui/material'
+import { styled, TableCell, TableRow, TableRowProps } from '@mui/material'
 import React from 'react'
 import HotWalletIcon from '../icons/HotWalletIcon'
 import IEntry from '../types/IEntry'
-import { styled } from '@mui/material'
-import { hover } from '@testing-library/user-event/dist/hover'
 
 // Define your custom props
 interface CustomTableRowProps extends TableRowProps {

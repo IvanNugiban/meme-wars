@@ -59,7 +59,7 @@ const AdminMenu = () => {
   return (
     <SpeedDial
       ariaLabel="SpeedDial basic example"
-      sx={{ position: 'absolute', bottom: 70, right: 25 }}
+      sx={{ position: 'absolute', bottom: 70, right: 20  }}
       onOpen={() => setOpen(true)}
       onClose={() => setOpen(false)}
       open={open}

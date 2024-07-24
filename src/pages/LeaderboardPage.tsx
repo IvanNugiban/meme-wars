@@ -33,7 +33,7 @@ const LeaderboardPage = observer(({ event }: IProps) => {
   const leaderboardData: IEvent | undefined | null = isCurrentEvent ? event : Leaderboard.previousEvent;
 
   const userEntry = useMemo(() => {
-    if (leaderboardData) {
+    if (leaderboardData?.leaderboard) {
       const index = leaderboardData.leaderboard.findIndex(item => item.nearId === HotWallet.user?.nearAccountId);
 
       if (index === -1) return undefined;
@@ -65,7 +65,7 @@ const LeaderboardPage = observer(({ event }: IProps) => {
         <Tab label="Previous event" />
       </Tabs>
 
-      {!leaderboardData || leaderboardData.leaderboard.length === 0 ? <ErrorMessage text={"There is no data to display."} />
+      {!leaderboardData?.leaderboard || leaderboardData.leaderboard.length === 0 ? <ErrorMessage text={"There is no data to display."} />
         :
         <React.Fragment>
           <EventPeriod startDate={leaderboardData.startDate} endDate={leaderboardData.endDate} />
