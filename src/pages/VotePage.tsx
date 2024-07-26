@@ -68,7 +68,7 @@ const VotePage = observer(({ event }: IProps) => {
       <Box position='relative' width="100%" minHeight="15px" sx={{ backgroundColor: "black" }}>
         <Box display='flex' justifyContent='center' alignItems='center' width='50px' height='50px' position="absolute" zIndex={10}
           left="50%" textAlign='center' sx={{ backgroundColor: "black", borderRadius: "50%", transform: "translate(-50%, -40%)" }} >
-          <Typography fontFamily="cursive">
+          <Typography >
             OR
           </Typography>
         </Box>
@@ -78,7 +78,7 @@ const VotePage = observer(({ event }: IProps) => {
       </VoteContainer>
 
 
-      <Typography right='20px' top='12px' zIndex='10000'  position='absolute' fontFamily="cursive" fontSize='1em'>
+      <Typography right='20px' top='12px' zIndex='10000'  position='absolute' fontSize='1em'>
         {Entries.userVoted}/{event.voteLimit}
       </Typography>
     </Box>

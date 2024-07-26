@@ -31,7 +31,7 @@ const LeaderboardItem = ({ entry, position, onClick, highlighted = false }: IPro
     return (
             <HighlightedTableRow onClick={onClick} key={entry.nearId} highlighted={highlighted}>
                 <TableCell style={{ minWidth: '20px', maxWidth: '200px' }}>{position}</TableCell>
-                <TableCell style={{ minWidth: '50px', maxWidth: '120px', textOverflow: "ellipsis", overflow: "hidden" }}>
+                <TableCell style={{ minWidth: '50px', maxWidth: '120px', textOverflow: "ellipsis", overflow: "hidden", whiteSpace: 'nowrap'}}>
                     {entry.nearId}
                 </TableCell>
                 <TableCell style={{ minWidth: '50px', maxWidth: '200px', display: "flex", alignItems: "center", gap: "10px", paddingLeft: "20px" }} >

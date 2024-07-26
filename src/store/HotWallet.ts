@@ -15,7 +15,7 @@ class HotWallet {
 
         const here = await HereWallet.connect({
             botId: "memewarss_bot/app", 
-            walletId: "herewalletbot/beta",
+            walletId: "herewalletbot/app",
         });
         
         if (await here.isSignedIn()) {
